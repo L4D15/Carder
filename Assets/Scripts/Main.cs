@@ -13,7 +13,7 @@ public class Main : MonoBehaviour
         saveService = new SaveService(Application.dataPath + "/Output");
         captureService = new CaptureService();
 
-        cards = Resources.LoadAll<GameObject>("Cards");
+        cards = Resources.LoadAll<GameObject>("LargeCards");
 
         StartCapture();
     }
