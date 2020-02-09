@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -44,11 +45,89 @@ namespace Becerra.Carder
             return model;
         }
 
+        public IEnumerable<string> SplitIntoSeparateCards(string rawText)
+        {
+            List<string> cards = new List<string>();
+            string[] split = rawText.Split('\n');
+            List<string> accumulatedSections = new List<string>();
+
+            for (int i = 0; i < split.Length; i++)
+            {
+                string section = split[i];
+
+                if (IsNameMetadata(section) && i > 0)
+                {
+                    string card = MergeSectionsIntoCard(accumulatedSections);
+
+                    if (string.IsNullOrEmpty(card) == false)
+                    {
+                        cards.Add(card);
+                    }
+                    
+                    // Start a new card
+                    accumulatedSections.Clear();
+                    accumulatedSections.Add(section);
+                }
+                else if (i == split.Length - 1)
+                {
+                    // Merge all accumulated sections into one card
+                    accumulatedSections.Add(section);
+                    
+                    string card = MergeSectionsIntoCard(accumulatedSections);
+
+                    if (string.IsNullOrEmpty(card) == false)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                else
+                {
+                    accumulatedSections.Add(section);
+                }
+            }
+
+            return cards;
+        }
+
+        private string MergeSectionsIntoCard(IEnumerable<string> sections)
+        {
+            string card = string.Empty;
+
+            foreach (var section in sections)
+            {
+                if (section == "\n" || section == "\r") continue;
+                card += section.Trim() + "\n";
+            }
+
+            card.Replace(@"\r", @"\n");
+            
+            return card;
+        }
+
         private CardSection ParseSection(string text)
         {
             if (string.IsNullOrEmpty(text)) return null;
+
+            CardSection section;
+
+            if (CardSectionSeparator.IsOfType(text))
+            {
+                section = new CardSectionSeparator(text);
+            }
+            else if (CardSectionActionTitle.IsOfType(text))
+            {
+                section = new CardSectionActionTitle(text);
+            }
+            else if (CardSectionListItem.IsOfType(text))
+            {
+                section = new CardSectionListItem(text);
+            }
+            else
+            {
+                section = new CardSectionText(text);
+            }
             
-            return new CardSection();
+            return section;
         }
 
         private bool IsMetadata(string text)
@@ -64,11 +143,11 @@ namespace Becerra.Carder
 
             switch (key)
             {
-                case "source":
-                case "front":
-                case "back":
-                case "categories":
-                case "tags":
+                case "Source":
+                case "Front":
+                case "Back":
+                case "Categories":
+                case "Tags":
                 return true;
             }
 
@@ -90,27 +169,27 @@ namespace Becerra.Carder
 
                 switch (key)
                 {
-                    case "categories":
+                    case "Categories":
                     {
                         model.categories = GetValuesList(value);
                         break;
                     }
-                    case "tags":
+                    case "Tags":
                     {
                         model.tags = GetValuesList(value);
                         break;
                     }
-                    case "front":
+                    case "Front":
                     {
                         model.frontImage = value;
                         break;
                     }
-                    case "back":
+                    case "Back":
                     {
                         model.backImage = value;
                         break;
                     }
-                    case "source":
+                    case "Source":
                     {
                         model.source = value;
                         break;
@@ -148,14 +227,14 @@ namespace Becerra.Carder
             return match.Value;
         }
 
-        private List<string> GetValuesList(string text)
+        public static List<string> GetValuesList(string text)
         {
             var trimmedText = TrimValuesList(text);
 
             return new List<string>(trimmedText.Split(','));
         }
         
-        private string TrimValuesList(string text)
+        public static string TrimValuesList(string text)
         {
             var regex = new Regex(@"(?<=,)\s");
 

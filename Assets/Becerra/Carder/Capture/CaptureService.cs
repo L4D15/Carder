@@ -5,27 +5,25 @@ namespace Becerra.Carder.Capture
 {
     public class CaptureService
     {
-        public async Task<Texture2D> CaptureCard(RectTransform card)
+        public async Task<Texture2D> CaptureCard(CardView card)
         {
-            int width = Mathf.CeilToInt(card.sizeDelta.x);
-            int height = Mathf.CeilToInt(card.sizeDelta.y);
-            int x = Mathf.CeilToInt(Screen.width * 0.5f + card.rect.x);
-            int y = Mathf.CeilToInt(Screen.height * 0.5f + card.rect.y);
+            var rect = card.GetComponent<RectTransform>();
+            int width = Mathf.FloorToInt(rect.sizeDelta.x);
+            int height = Mathf.FloorToInt(rect.sizeDelta.y);
+            int x = Mathf.FloorToInt(Screen.width * 0.5f + rect.rect.x);
+            int y = Mathf.FloorToInt(Screen.height * 0.5f + rect.rect.y);
             
             var capturedRect = new Rect(x, y, width, height);
 
-            Debug.Log("Card rect " + card.rect);
-            Debug.Log("Captured rect " + capturedRect);
-            
             var texture = new Texture2D(width, height, TextureFormat.RGB24, false);
 
             await new WaitForEndOfFrame();
 
-            texture.name = card.name;
+            texture.name = card.Model.name;
             texture.ReadPixels(capturedRect, 0, 0);
             texture.Apply();
 
-            Debug.Log("Captured card " + card);
+            Debug.Log("Captured card " + card.Model.name);
 
             return texture;
         }

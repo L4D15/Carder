@@ -16,9 +16,9 @@ namespace Becerra.Save
             var bytes = texture.EncodeToPNG();
             string path = savePath + "/" + texture.name + ".png";
 
+            Debug.Log("Saving texture " + texture + " at " + path);
+            
             System.IO.File.WriteAllBytes(path, bytes);
-
-            Debug.Log("Saved texture " + texture + " at " + path);
         }
     }
 }

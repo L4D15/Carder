@@ -1,21 +1,27 @@
-﻿using Becerra.Carder.Capture;
+﻿using Becerra.Carder;
+using Becerra.Carder.Capture;
 using Becerra.Save;
 using UnityEngine;
 
 public class Main : MonoBehaviour
 {
     public RectTransform cardParent;
+    public CardView cardView;
 
+    private CardParser parser;
     private SaveService saveService;
     private CaptureService captureService;
-    private GameObject[] cards;
+    private TextAsset[] dataFiles;
 
     public void Awake()
     {
+        parser = new CardParser();
         saveService = new SaveService(Application.dataPath + "/Output");
         captureService = new CaptureService();
+        
+        cardView.Initialize();
 
-        cards = Resources.LoadAll<GameObject>("LargeCards");
+        dataFiles = Resources.LoadAll<TextAsset>(string.Empty);
 
         StartCapture();
     }
@@ -27,20 +33,38 @@ public class Main : MonoBehaviour
 
     private async void Capture()
     {
-        foreach (var card in cards)
+        foreach (var dataFile in dataFiles)
         {
-            Debug.Log("Loading card " + card.name);
+            string text = dataFile.text;
 
-            var cardInScene = Instantiate(card, cardParent);
-            cardInScene.name = cardInScene.name.Replace("(Clone)", string.Empty);
+            var cards = parser.SplitIntoSeparateCards(text);
 
-            var rect = cardInScene.GetComponent<RectTransform>();
+            foreach (var card in cards)
+            {
+                ShowCard(card);
 
-            var texture = await captureService.CaptureCard(rect);
-
-            saveService.SaveTexture(texture);
-
-            Destroy(cardInScene.gameObject);
+                var texture = await captureService.CaptureCard(cardView);
+                
+                saveService.SaveTexture(texture);
+                
+                Debug.Break();
+                
+                HideCard(cardView);
+            }
         }
+    }
+
+    private void ShowCard(string cardText)
+    {
+        CardController card = new CardController(cardText);
+        
+        card.Parse(parser);
+        
+        cardView.Show(card.model);
+    }
+
+    private void HideCard(CardView cardView)
+    {
+        cardView.Hide();
     }
 }
