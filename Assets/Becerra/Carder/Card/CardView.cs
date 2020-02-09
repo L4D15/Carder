@@ -72,6 +72,17 @@ namespace Becerra.Carder
             ShowSource(model.source);
             ShowTags(model.tags);
             ShowSections(model.sections);
+            
+            ShowFrontImage(model.frontImage);
+
+            if (string.IsNullOrEmpty(model.backImage))
+            {
+                ShowBackImage(model.frontImage);
+            }
+            else
+            {
+                ShowBackImage(model.backImage);
+            }
         }
 
         public void Hide()
@@ -130,12 +141,25 @@ namespace Becerra.Carder
 
         private void ShowFrontImage(string imageName)
         {
-            // TODO
+            frontImage.sprite = LoadSprite(imageName);
         }
 
         private void ShowBackImage(string imageName)
         {
-            // TODO
+            backImage.sprite = LoadSprite(imageName);
+        }
+
+        private Sprite LoadSprite(string imageName)
+        {
+            Sprite sprite = Resources.Load<Sprite>("Images/" + imageName);
+
+            if (sprite == null)
+            {
+                Debug.LogError("Image " + imageName + "not found in Resources/Images. Using the default one.");
+                return LoadSprite("DefaultImage");
+            }
+            
+            return sprite;
         }
 
         private void ShowSource(string source)

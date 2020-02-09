@@ -23,8 +23,6 @@ namespace Becerra.Carder.Capture
             texture.ReadPixels(capturedRect, 0, 0);
             texture.Apply();
 
-            Debug.Log("Captured card " + card.Model.name);
-
             return texture;
         }
     }

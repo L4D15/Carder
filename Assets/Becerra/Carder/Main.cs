@@ -21,7 +21,7 @@ public class Main : MonoBehaviour
         
         cardView.Initialize();
 
-        dataFiles = Resources.LoadAll<TextAsset>(string.Empty);
+        dataFiles = Resources.LoadAll<TextAsset>("Cards");
 
         StartCapture();
     }
@@ -41,13 +41,12 @@ public class Main : MonoBehaviour
 
             foreach (var card in cards)
             {
+                HideCard(cardView);
                 ShowCard(card);
 
                 var texture = await captureService.CaptureCard(cardView);
                 
                 saveService.SaveTexture(texture);
-
-                HideCard(cardView);
             }
         }
     }
