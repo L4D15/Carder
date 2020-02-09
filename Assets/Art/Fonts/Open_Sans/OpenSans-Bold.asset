@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: OpenSans-Bold SDF
+  m_Name: OpenSans-Bold
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -766528734
   material: {fileID: 2339976041859066535}
-  materialHashCode: 0
+  materialHashCode: -1725086103
   m_Version: 1.1.0
   m_SourceFontFileGUID: 7d769f2ea37fb2b438b00592c15bb8e3
   m_SourceFontFile_EditorRef: {fileID: 0}

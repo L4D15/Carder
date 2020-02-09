@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: OpenSans-BoldItalic SDF
+  m_Name: OpenSans-BoldItali
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 351283896
   material: {fileID: 1419455810694494873}
-  materialHashCode: 0
+  materialHashCode: -2103589581
   m_Version: 1.1.0
   m_SourceFontFileGUID: 919e68a036cc3bf4da11888707d0bda1
   m_SourceFontFile_EditorRef: {fileID: 0}
