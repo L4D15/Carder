@@ -71,8 +71,8 @@ MonoBehaviour:
     <b>urna</b> sed semper venenatis, est ipsum viverra sapien, <i>et semper</i>
     eros nunc in dui. Nulla vestibulum <b><i>dictum</b></i> mauris a laoreet.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aca477ab09cc9ec46898aeaef0e5f9ef, type: 2}
-  m_sharedMaterial: {fileID: 9072567098392047106, guid: aca477ab09cc9ec46898aeaef0e5f9ef,
+  m_fontAsset: {fileID: 11400000, guid: ac3ba2c19cf076d4b9817c49ad626002, type: 2}
+  m_sharedMaterial: {fileID: 2778271914135062357, guid: ac3ba2c19cf076d4b9817c49ad626002,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
     linkCount: 0
     lineCount: 172
     pageCount: 1
-    materialCount: 3
+    materialCount: 4
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -260,8 +260,8 @@ GameObject:
   - component: {fileID: 3441421951085933114}
   - component: {fileID: 4834980017511257675}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [LibreBaskerville-Regular SDF Material + LibreBaskerville-Italic
-    SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenSans-Regular SDF Material + OpenSans-RegularItalic SDF
+    Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: ef4de3646c2438c4e8d31050ee7a33d1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bc9818dc461b6cd46bfd6400b5a2cc09, type: 2}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
@@ -333,8 +333,7 @@ GameObject:
   - component: {fileID: 6828972055432186610}
   - component: {fileID: 613049746925476572}
   m_Layer: 5
-  m_Name: TMP SubMeshUI [LibreBaskerville-Regular SDF Material + LibreBaskerville-Bold
-    SDF Atlas]
+  m_Name: TMP SubMeshUI [OpenSans-Regular SDF Material + OpenSans-Bold SDF Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,7 +384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 6ee3fb06d9b47ed43ade09af92eb3e57, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 876b74425cb61bb418a505aae52fb4c3, type: 2}
   m_spriteAsset: {fileID: 0}
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}

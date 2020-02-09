@@ -46,9 +46,7 @@ public class Main : MonoBehaviour
                 var texture = await captureService.CaptureCard(cardView);
                 
                 saveService.SaveTexture(texture);
-                
-                Debug.Break();
-                
+
                 HideCard(cardView);
             }
         }
