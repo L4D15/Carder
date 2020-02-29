@@ -72,17 +72,12 @@ namespace Becerra.Carder
             ShowSource(model.source);
             ShowTags(model.tags);
             ShowSections(model.sections);
-            
-            ShowFrontImage(model.frontImage);
 
-            if (string.IsNullOrEmpty(model.backImage))
-            {
-                ShowBackImage(model.frontImage);
-            }
-            else
-            {
-                ShowBackImage(model.backImage);
-            }
+            string frontImage = string.IsNullOrEmpty(model.frontImage) ? model.name : model.frontImage;
+            string backImage = string.IsNullOrEmpty(model.backImage) ? frontImage : model.backImage;
+            
+            ShowFrontImage(frontImage);
+            ShowBackImage(backImage);
         }
 
         public void Hide()
